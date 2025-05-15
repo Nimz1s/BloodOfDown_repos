@@ -1,71 +1,35 @@
-# Visual Studio
-.vscode/
-.vs/
-*.VC.db
-*.VC.opendb
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
+# Ігнорувати всі підпапки в Content/
+Content/*
 
-# Build folders
-Binaries/
-Build/
-DerivedDataCache/
-Intermediate/
-Saved/
-BloodOfDown/
-
-# Compiled files
-*.pdb
-*.obj
-*.exe
-*.dll
-*.app
-*.lib
-
-# Ignore temporary and cache files
-*.log
-*.tlog
-*.ipch
-*.db
-*.opensdf
-*.sdf
-
-# Ignore Unreal auto-generated project files (you can regenerate them anytime)
-*.xcodeproj
-*.xcworkspace
-*.xcconfig
-
-# Ignore Mac and Linux system files
-.DS_Store
-*.swp
-*.tmp
-
-# Ignore compiled shaders
-*.ush
-*.usf
-
-# Ignore backup files
-*.bak
-*.old
-
-# Keep C++ source files
-!Source/**
-
-# Keep project descriptor
-!*.uproject
-
-# Keep maps, blueprints, and assets
-!Content/**/*.umap
-
-
-# Ігнорувати всі папки в Content/
-Content/*/
-
-# Але дозволити AI і ThirdPerson
+# Але дозволити AI та ThirdPerson
 !Content/AI/
 !Content/ThirdPerson/
 
-# Keep config files
-!Config/**
+# І дозволити ВСІ файли в них
+!Content/AI/**
+!Content/ThirdPerson/**
+
+# Ігнорувати стандартні тимчасові та згенеровані папки
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Backup/
+
+# IDE/редактори
+.vscode/
+.vs/
+.vsconfig
+
+# Файли проєкту
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.log
+*.tmp
+
+*.md
+*.htm
+
+.DS_Store
