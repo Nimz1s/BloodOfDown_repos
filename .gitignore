@@ -28,6 +28,7 @@ Backup/
 *.sdf
 *.log
 *.tmp
+*.png
 
 *.md
 *.htm
