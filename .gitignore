@@ -29,6 +29,7 @@ Backup/
 *.log
 *.tmp
 *.png
+*.pdf
 
 *.md
 *.htm
