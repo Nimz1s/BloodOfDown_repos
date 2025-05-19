@@ -16,6 +16,9 @@ public class BloodOfDown : ModuleRules
 			"EnhancedInput",
 			"AIModule",
 			"GameplayTasks",
-			"NavigationSystem"});
+			"NavigationSystem",
+			"UMG",
+			"Slate",
+			"SlateCore"});
 	}
 }
