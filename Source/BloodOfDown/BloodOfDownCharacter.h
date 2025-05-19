@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CppAICharacterBase.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "BloodOfDownCharacter.generated.h"
+
 
 class USpringArmComponent;
 class UCameraComponent;
@@ -16,7 +18,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class ABloodOfDownCharacter : public ACharacter
+class ABloodOfDownCharacter : public ACppAICharacterBase //ACharacter
 {
 	GENERATED_BODY()
 
