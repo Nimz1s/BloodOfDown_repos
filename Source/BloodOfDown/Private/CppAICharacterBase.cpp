@@ -13,7 +13,7 @@
 namespace defs
 {
 	FVector const HealthBarZ{ 0.f, 0.f, 95.f }; // Z offset for health bar  
-	FVector const RightFirstBoxSize{ 5.f };
+	/*FVector const RightFirstBoxSize{ 5.f };*/
 	FName const RightFirstSocketName{"hand_r_socket"}; // Z offset for health bar
 	FVector const CollisionBoxLocation{ -7.f, 0.f, 0.f }; 
 }	
@@ -45,6 +45,11 @@ ACppAICharacterBase::ACppAICharacterBase() : WidgetComponent{ CreateDefaultSubob
 			false };
 		RightFirstCollisionBox->AttachToComponent(GetMesh(), Rules, defs::RightFirstSocketName);
 		RightFirstCollisionBox->SetRelativeLocation(defs::CollisionBoxLocation);
+
+		// ✳️ Вимикаємо колізію на старті
+		UE_LOG(LogTemp, Warning, TEXT("Attack End - Collision Disabled"));
+		RightFirstCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		RightFirstCollisionBox->SetNotifyRigidBodyCollision(false);
 	}
 	
 }
@@ -54,6 +59,11 @@ void ACppAICharacterBase::BeginPlay()
 	Super::BeginPlay();
 	RightFirstCollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ACppAICharacterBase::OnAttackOverlapBegin);
 	RightFirstCollisionBox->OnComponentEndOverlap.AddDynamic(this, &ACppAICharacterBase::OnAttackOverlapEnd);
+
+	RightFirstCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	RightFirstCollisionBox->SetNotifyRigidBodyCollision(false);  // якщо не використовуєш фізику — можеш не ставити
+	RightFirstCollisionBox->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	RightFirstCollisionBox->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);  // тільки Pawn
 	
 }
 
@@ -113,12 +123,14 @@ float ACppAICharacterBase::GetMaxHealth() const
 void ACppAICharacterBase::SetHealth(float const NewHealth)
 {
 	Health = NewHealth;
-	if (Health <= 0)
+	if (Cast<ABloodOfDownCharacter>(this))
 	{
-		UE_LOG(LogTemp, Error, TEXT("You Lose!!!!"));
-		GetWorld()->GetFirstPlayerController()->ConsoleCommand("quit");
+		if (Health <= 0)
+		{
+			UE_LOG(LogTemp, Error, TEXT("You Lose!!!!"));
+			GetWorld()->GetFirstPlayerController()->ConsoleCommand("quit");
+		}
 	}
-		
 	else if (Cast<ANPC>(this))
 	{
 		if (Health <= 0)
@@ -133,13 +145,21 @@ void ACppAICharacterBase::SetHealth(float const NewHealth)
 
 void ACppAICharacterBase::AttackStart()
 {
-	RightFirstCollisionBox->SetCollisionProfileName("First");
-	RightFirstCollisionBox->SetNotifyRigidBodyCollision(true);
+	/*UE_LOG(LogTemp, Warning, TEXT("Attack Start - Collision Enabled"));
+	RightFirstCollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	RightFirstCollisionBox->SetNotifyRigidBodyCollision(true);*/
+
+	UE_LOG(LogTemp, Warning, TEXT("Attack Start - Collision Enabled"));
+	RightFirstCollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
 void ACppAICharacterBase::AttackEnd()
 {
-	RightFirstCollisionBox->SetCollisionProfileName("First");
-	RightFirstCollisionBox->SetNotifyRigidBodyCollision(false);
+	/*UE_LOG(LogTemp, Warning, TEXT("Attack End - Collision Disabled"));
+	RightFirstCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	RightFirstCollisionBox->SetNotifyRigidBodyCollision(false);*/
+
+	UE_LOG(LogTemp, Warning, TEXT("Attack End - Collision Disabled"));
+	RightFirstCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
