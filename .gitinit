@@ -1,0 +1,25 @@
+# 🔧 Unreal Engine Generated
+*.sln
+*.sdf
+*.opensdf
+*.vcxproj*
+*.pdb
+*.ipch
+*.db
+
+# 🔄 Автоматично генеровані папки
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.vscode/
+
+# ❌ Стартовий контент (якщо не використовуєш)
+Content/StarterContent/
+Content/Developers/
+
+# ✅ ДОЗВОЛЕНО для C++ і анімацій
+!Content/
+!Source/
