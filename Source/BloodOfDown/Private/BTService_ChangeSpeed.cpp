@@ -3,8 +3,13 @@
 
 #include "BTService_ChangeSpeed.h"
 #include <NPC.h>
+<<<<<<< HEAD
 #include "NPC_AIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+=======
+#include <AIController.h>
+#include <GameFramework/CharacterMovementComponent.h>
+>>>>>>> 42
 
 UBTService_ChangeSpeed::UBTService_ChangeSpeed()
 {
